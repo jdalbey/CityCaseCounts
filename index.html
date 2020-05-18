@@ -3,20 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>City Case Counts over time</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
 <style>
 .caption {
     font-family: sans-serif;
     text-align: center
 }
 </style>
-<script>
-function run()
-{    
-  var x = document.getElementById('one')
-  x.style.color = "green"
-}    
-</script>
+</head>
+<body>
+<div>Chart of positive case counts by city over time</div>
+<canvas id="myChart" width="400" height="400"></canvas>
 <script>
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
@@ -56,12 +53,5 @@ var myChart = new Chart(ctx, {
     }
 });
 </script>
-<body onload="run()">
-  Hello World
-  <div id="one">
-    Pack my bag with five dozen liquor jars
-  </div>
-<canvas id="myChart" width="400" height="400"></canvas>
-
 </body>
 </html>
