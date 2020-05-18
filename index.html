@@ -14,10 +14,10 @@
 <body>
 <div>Chart of positive case counts by city over time</div>
 <canvas id="myChart" width="200" height="200"></canvas>
-<script>new Chart(document.getElementById("myChart"),{"type":"line",
-"data":
-    {"labels":
-        ["January","February","March","April","May","June","July"],
+<script>new Chart(document.getElementById("myChart"),
+{"type":"line",
+ "data":
+    {
     "datasets":
         [
             {"label":"My First Dataset",
@@ -25,14 +25,17 @@
             "fill":false,
             "borderColor":"blue",
             "lineTension":0.1},
-            {"label":"My Secomd Dataset",
+            {"label":"My Second Dataset",
             "data":[30,62,40,48,37,18,25],
             "fill":false,
-            "borderColor":"red",
+            "borderColor":"green",
             "lineTension":0.1}
-        ]
+        ],
+    "labels":
+        ["January","February","March","April","May","June","July"]
     },
-"options":{}});
+ "options":{}
+});
 </script>
 </body>
 </html>
