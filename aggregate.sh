@@ -1,7 +1,7 @@
 #!/bin/bash
-# Run by NAS task scheduler once a day.
 # Fetch the daily cases page.  Save in csv format in a file named with today's date.
 # Aggregate the daily data into a single cumulative csv file.
+# This script is run by NAS task scheduler once a day.
 # N.B. For some reason the NAS won't overwrite the output files
 # if the content hasn't changed.  At least that's what it seems like.
 # This shouldn't be a problem in the normal workflow, but during
@@ -33,14 +33,14 @@ fi
 cd $1/Computer/Projects/CityCaseCounts/dailydata
 for f in *.csv ; do tail -n+2 $f | sort | cut -d"," -f2   > $kWork/$f ; done
 
-# Create a file of just city names
+# Create a file of just city names sorted alphabetically
 tail -n+2 2020-0425.csv | sort | cut -d"," -f1  > $kWork/cities.txt
+
 # Create a file of city names ordered by count (descending) from today's data
 sort -k2 -t, -nr "$1/Computer/Projects/CityCaseCounts/dailydata/`date +%Y-%m%d`.csv" | cut -d, -f1 > $1/Computer/Projects/CityCaseCounts/CityCaseCounts.git/trunk/sortedCityNames.txt
 
 # Get all the filenames (dates) into a single file
 ls -1 *.csv | cut -d "." -f 1  | cut -d "-" -f 2 | paste -d, -s > $1/Computer/Projects/CityCaseCounts/CityCaseCounts.git/trunk/days.txt
-
 
 # Merge the city names and the aggregate daily data
 paste -d, $kWork/cities.txt $kWork/2*.csv > $1/Computer/Projects/CityCaseCounts/CityCaseCounts.git/trunk/cumulative.csv
