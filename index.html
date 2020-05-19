@@ -63,37 +63,37 @@ function parseCSV(csvString, delimiter)
 <script>
 
 var dayLabels;
-loadJSON("days.txt", function(csvstring) {
-    dayLabels = parseCSV(csvstring,",");
-});
-
 var palette = ["#83ce6d","#e8d9b9","#ce6ba5","#5e1f4c","#4b5f20","#e8b9d0","#1f505e","#6aa1cd","#35822b","#434ec0"]
 var myarray;
 var cityNames = [];
 var cityCounts = [];
 var datasets = [];
-loadJSON("cumulative.csv", function(csvstring) {
-    myarray = parseCSV(csvstring,",");
-	for(i=0; i<myarray.length-1;i++)
-    {
-        var row = myarray[i]
-        cityNames.push(row[0])
-        cityCounts.push(row.slice(1))
-        var item =  {"label":cityNames[i],
-                "data":cityCounts[i],
-                "fill":false,
-                "borderColor":palette[i],
-                "lineTension":0.1};
-        datasets.push(item)
-    }
-    new Chart(document.getElementById("myChart"),
-    {"type":"line",
-     "data":
+loadJSON("days.txt", function(csvstring) {
+    dayLabels = parseCSV(csvstring,",");
+
+    loadJSON("cumulative.csv", function(csvstring) {
+        myarray = parseCSV(csvstring,",");
+	    for(i=0; i<myarray.length-1;i++)
         {
-        "datasets": datasets,
-        "labels": dayLabels[0]
-        },
-     "options":{}
+            var row = myarray[i]
+            cityNames.push(row[0])
+            cityCounts.push(row.slice(1))
+            var item =  {"label":cityNames[i],
+                    "data":cityCounts[i],
+                    "fill":false,
+                    "borderColor":palette[i],
+                    "lineTension":0.1};
+            datasets.push(item)
+        }
+        new Chart(document.getElementById("myChart"),
+        {"type":"line",
+         "data":
+            {
+            "datasets": datasets,
+            "labels": dayLabels[0]
+            },
+         "options":{}
+        });
     });
 });
 </script>
