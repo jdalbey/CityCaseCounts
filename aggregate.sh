@@ -1,4 +1,5 @@
 #!/bin/bash
+# Create data file needed for Positve City Case Counts
 # Fetch the daily cases page.  Save in csv format in a file named with today's date.
 # Aggregate the daily data into a single cumulative csv file.
 # This script is run by NAS task scheduler once a day.
