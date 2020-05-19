@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Read CSV</title>
+<title>Positive Case Counts by City over time.</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
 <style>
 td {
@@ -14,10 +14,9 @@ td {
 }
 </style>
 <script>
-// Load the dynamic json file for highways, etc.
+// Utility to load the dynamic json file for highways, etc.
 // Ref: https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
 // Can also load .csv files
-
 function loadJSON(inFile, callback)
 {
     var xobj = new XMLHttpRequest();
@@ -63,21 +62,28 @@ function parseCSV(csvString, delimiter)
 <script>
 
 var dayLabels;
-var palette = ["#83ce6d","#e8d9b9","#ce6ba5","#5e1f4c","#4b5f20","#e8b9d0","#1f505e","#6aa1cd","#35822b","#434ec0"]
+var palette = [
+"#9D44B5","#595F72","#42D9C8","#F5B841",
+"#DAFF7D","#6C5A49","red","#A7C6DA",
+"#2C8C99","#003F91","#23CE6B"]
 var myarray;
 var cityNames = [];
 var cityCounts = [];
 var datasets = [];
+// Load the days that label the x axis
 loadJSON("days.txt", function(csvstring) {
     dayLabels = parseCSV(csvstring,",");
 
+    // load all the daily data
     loadJSON("cumulative.csv", function(csvstring) {
         myarray = parseCSV(csvstring,",");
+        // Process each row (city)
 	    for(i=0; i<myarray.length-1;i++)
         {
             var row = myarray[i]
             cityNames.push(row[0])
             cityCounts.push(row.slice(1))
+            // define a chart item
             var item =  {"label":cityNames[i],
                     "data":cityCounts[i],
                     "fill":false,
@@ -85,6 +91,7 @@ loadJSON("days.txt", function(csvstring) {
                     "lineTension":0.1};
             datasets.push(item)
         }
+        // Build the chart
         new Chart(document.getElementById("myChart"),
         {"type":"line",
          "data":
