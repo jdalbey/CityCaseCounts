@@ -58,14 +58,13 @@ function parseCSV(csvString, delimiter)
 
 </script>
 <body>
-Positive Case Counts by City over time.
+<center><h3>Positive Case Counts by City over time.</h3></center>
 <canvas id="myChart" width="200" height="200"></canvas>
 <script>
 
-var dayLabels = [];
+var dayLabels;
 loadJSON("days.txt", function(csvstring) {
     dayLabels = parseCSV(csvstring,",");
-    console.log(dayLabels);
 });
 
 var palette = ["#83ce6d","#e8d9b9","#ce6ba5","#5e1f4c","#4b5f20","#e8b9d0","#1f505e","#6aa1cd","#35822b","#434ec0"]
@@ -87,14 +86,12 @@ loadJSON("cumulative.csv", function(csvstring) {
                 "lineTension":0.1};
         datasets.push(item)
     }
-    console.log(cityNames);
-    console.log(cityCounts[9]);
     new Chart(document.getElementById("myChart"),
     {"type":"line",
      "data":
         {
         "datasets": datasets,
-        "labels": dayLabels
+        "labels": dayLabels[0]
         },
      "options":{}
     });
