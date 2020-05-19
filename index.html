@@ -54,38 +54,51 @@ function parseCSV(csvString, delimiter)
     
     return result;
 }
-
+function createDict(cityArray)
+{
+    for(i=0; i<cityArray.length-1;i++) 
+    {
+        var name = cityArray[i][0];
+        cityDict[name] = cityArray[i].slice(1);
+    }
+}
 </script>
 <body>
-<center><h3>Positive Case Counts by City over time.</h3></center>
+<center><h3>Positive Case Counts by City over time.</h3>
+<i>Mouse over a data point to see city and count.</i></center>
 <canvas id="myChart" width="200" height="200"></canvas>
 <script>
-
-var dayLabels;
+//#42D9C8
 var palette = [
-"#9D44B5","#595F72","#42D9C8","#F5B841",
-"#DAFF7D","#6C5A49","red","#A7C6DA",
-"#2C8C99","#003F91","#23CE6B"]
+"red","blue","cyan","#00FF00",
+"brown","green","magenta","orange",
+"pink","gray","yellow"]
 var myarray;
+var dayLabels;
+var cityDict = {};
 var cityNames = [];
 var cityCounts = [];
 var datasets = [];
+var sortednames;
+// Load the file of city names sorted by case count (descending)
+loadJSON("sortedCityNames.txt", function(response) {
+    sortednames = response.split('\n');
 // Load the days that label the x axis
 loadJSON("days.txt", function(csvstring) {
-    dayLabels = parseCSV(csvstring,",");
+    dayLabels = csvstring.split(",");
 
     // load all the daily data
     loadJSON("cumulative.csv", function(csvstring) {
         myarray = parseCSV(csvstring,",");
-        // Process each row (city)
-	    for(i=0; i<myarray.length-1;i++)
+        // Create a lookup table with city as key
+        createDict(myarray);
+        // Process each city
+	    for(i=0; i<sortednames.length-2;i++)
         {
-            var row = myarray[i]
-            cityNames.push(row[0])
-            cityCounts.push(row.slice(1))
+            var name = sortednames[i]
             // define a chart item
-            var item =  {"label":cityNames[i],
-                    "data":cityCounts[i],
+            var item =  {"label":name,
+                    "data":cityDict[name],
                     "fill":false,
                     "borderColor":palette[i],
                     "lineTension":0.1};
@@ -97,11 +110,12 @@ loadJSON("days.txt", function(csvstring) {
          "data":
             {
             "datasets": datasets,
-            "labels": dayLabels[0]
+            "labels": dayLabels
             },
          "options":{}
         });
     });
+});
 });
 </script>
 </body>
