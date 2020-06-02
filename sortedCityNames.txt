@@ -1,7 +1,7 @@
 "Paso Robles"
 "Atascadero"
-"Arroyo Grande"
 "Nipomo"
+"Arroyo Grande"
 "San Luis Obispo (city)"
 "Other"
 "CA Men's Colony (inmates)"
