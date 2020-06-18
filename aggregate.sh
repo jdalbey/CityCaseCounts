@@ -46,3 +46,4 @@ ls -1 $1/Computer/Projects/CityCaseCounts/dailydata/*.csv | python $1/Computer/P
 
 echo "Cumulative file created at `date`."
 
+../../commitdaily.sh
