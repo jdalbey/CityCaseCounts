@@ -40,11 +40,9 @@ tail -n+2 2020-0425.csv | sort | cut -d"," -f1  > $kWork/cities.txt
 # Create a file of city names ordered by count (descending) from today's data
 sort -k2 -t, -nr "$1/Computer/Projects/CityCaseCounts/dailydata/`date +%Y-%m%d`.csv" | cut -d, -f1 > $1/Computer/Projects/CityCaseCounts/CityCaseCounts.git/trunk/sortedCityNames.txt
 
-# Get all the filenames (dates) into a single file
-ls -1 *.csv | cut -d "." -f 1  | cut -d "-" -f 2 | paste -d, -s > $1/Computer/Projects/CityCaseCounts/CityCaseCounts.git/trunk/days.txt
-
 # Merge the city names and the aggregate daily data
-paste -d, $kWork/cities.txt $kWork/2*.csv > $1/Computer/Projects/CityCaseCounts/CityCaseCounts.git/trunk/cumulative.csv
+cd $1/Computer/Projects/CityCaseCounts/CityCaseCounts.git/trunk
+ls -1 $1/Computer/Projects/CityCaseCounts/dailydata/*.csv | python aggregate.py > cumulative.csv
 
 echo "Cumulative file created at `date`."
 
