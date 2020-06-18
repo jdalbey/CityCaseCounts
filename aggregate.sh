@@ -42,7 +42,7 @@ sort -k2 -t, -nr "$1/Computer/Projects/CityCaseCounts/dailydata/`date +%Y-%m%d`.
 
 # Merge the city names and the aggregate daily data
 cd $1/Computer/Projects/CityCaseCounts/CityCaseCounts.git/trunk
-ls -1 $1/Computer/Projects/CityCaseCounts/dailydata/*.csv | python aggregate.py > cumulative.csv
+ls -1 $1/Computer/Projects/CityCaseCounts/dailydata/*.csv | python $1/Computer/Projects/CityCaseCounts/CityCaseCounts.git/trunk/aggregate.py > $1/Computer/Projects/CityCaseCounts/CityCaseCounts.git/trunk/cumulative.csv
 
 echo "Cumulative file created at `date`."
 
