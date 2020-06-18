@@ -8,7 +8,7 @@
 "CA Men's Colony (inmates)"
 "Pismo Beach"
 "Morro Bay"
-"San Miguel"
 "Grover Beach"
+"San Miguel"
 "Los Osos"
 "City"
