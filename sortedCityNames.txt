@@ -1,6 +1,6 @@
 "Paso Robles"
-"Atascadero"
 "Nipomo"
+"Atascadero"
 "San Luis Obispo (city)"
 "Arroyo Grande"
 "Other"
